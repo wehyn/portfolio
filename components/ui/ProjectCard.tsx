@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import type { Project } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import AnimatedCounter from "./AnimatedCounter";
 
 export default function ProjectCard({
   project,
@@ -61,9 +62,15 @@ export default function ProjectCard({
         >
           {project.title}
         </h3>
-        <p className="mb-5 flex-1 text-sm leading-relaxed text-text-secondary">
+        <p className="mb-4 flex-1 text-sm leading-relaxed text-text-secondary">
           {project.description}
         </p>
+
+        {project.chromeStoreId && (
+          <div className="mb-5">
+            <AnimatedCounter storeId={project.chromeStoreId} />
+          </div>
+        )}
 
         {/* Tags */}
         <div className="mb-5 flex flex-wrap gap-1.5">
