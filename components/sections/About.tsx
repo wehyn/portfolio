@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -27,16 +28,13 @@ export default function About() {
             transition={{ duration: 0.55, ease }}
           >
             <div className="mx-auto w-fit">
-              <div className="relative h-72 w-64 overflow-hidden rounded-2xl bg-surface ring-1 ring-border transition-all duration-500 hover:ring-border-bright">
-                <div className="flex h-full w-full items-center justify-center">
-                  <span
-                    className="font-display font-bold select-none text-text-muted"
-                    style={{ fontSize: "9rem", letterSpacing: "-0.04em", lineHeight: 1 }}
-                  >
-                    {siteConfig.displayName[0]}
-                  </span>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-surface to-transparent" />
+              <div className="relative h-72 w-64">
+                <Image
+                  src="/images/memoji.png"
+                  alt="Wayne memoji"
+                  fill
+                  className="object-contain object-center"
+                />
               </div>
             </div>
 
