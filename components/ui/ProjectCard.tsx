@@ -33,7 +33,7 @@ export default function ProjectCard({
       >
         {project.image && (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+          <img src={project.image} alt={project.title} className="h-full w-full object-contain" />
         )}
       </div>
 
@@ -98,7 +98,7 @@ export default function ProjectCard({
               className="link-hover flex items-center gap-1.5 font-mono text-xs text-text-secondary transition-colors hover:text-text-primary"
             >
               <FiExternalLink size={12} />
-              Live demo
+              Chrome
             </a>
           )}
           {project.firefoxUrl && (
