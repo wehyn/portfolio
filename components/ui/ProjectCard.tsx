@@ -98,7 +98,7 @@ export default function ProjectCard({
               className="link-hover flex items-center gap-1.5 font-mono text-xs text-text-secondary transition-colors hover:text-text-primary"
             >
               <FiExternalLink size={12} />
-              Chrome
+              {project.liveUrlLabel ?? "Chrome"}
             </a>
           )}
           {project.firefoxUrl && (
