@@ -7,6 +7,7 @@ export interface Project {
   accentColor?: string;
   githubUrl?: string;
   liveUrl?: string;
+  liveUrlLabel?: string;
   firefoxUrl?: string;
   featured?: boolean;
   year?: number;
