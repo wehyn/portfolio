@@ -11,6 +11,7 @@ export interface Project {
   featured?: boolean;
   year?: number;
   status?: "live" | "wip" | "archived";
+  chromeStoreId?: string;
 }
 
 export interface SkillCategory {
