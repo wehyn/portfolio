@@ -101,6 +101,17 @@ export default function ProjectCard({
               Live demo
             </a>
           )}
+          {project.firefoxUrl && (
+            <a
+              href={project.firefoxUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-hover flex items-center gap-1.5 font-mono text-xs text-text-secondary transition-colors hover:text-text-primary"
+            >
+              <FiExternalLink size={12} />
+              Firefox
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
