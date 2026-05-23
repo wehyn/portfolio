@@ -13,6 +13,7 @@ export interface Project {
   year?: number;
   status?: "live" | "wip" | "archived";
   chromeStoreId?: string;
+  award?: string;
 }
 
 export interface SkillCategory {
