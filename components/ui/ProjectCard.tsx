@@ -54,6 +54,9 @@ export default function ProjectCard({
           {project.status === "wip" && (
             <span className="font-mono text-xs text-amber-400">In progress</span>
           )}
+          {project.award && (
+            <span className="font-mono text-xs text-amber-400">{project.award}</span>
+          )}
         </div>
 
         <h3
