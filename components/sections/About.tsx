@@ -5,12 +5,6 @@ import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import SectionHeader from "@/components/ui/SectionHeader";
 
-const stats = [
-  { label: "Projects Shipped", value: "10+" },
-  { label: "Years Coding", value: "3+" },
-  { label: "Cups of Coffee", value: "∞" },
-];
-
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
 export default function About() {
@@ -37,23 +31,6 @@ export default function About() {
                 />
               </div>
             </div>
-
-            {/* Stats */}
-            <div className="mt-8 grid grid-cols-3 gap-3">
-              {stats.map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-xl border border-border bg-surface p-4 text-center"
-                >
-                  <div className="font-display text-2xl font-semibold text-accent" style={{ letterSpacing: "-0.02em" }}>
-                    {s.value}
-                  </div>
-                  <div className="mt-1 font-mono text-xs leading-tight text-text-secondary">
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </div>
           </motion.div>
 
           {/* Bio */}
@@ -71,11 +48,13 @@ export default function About() {
               I thrive in collaborative environments where quality and
               craftsmanship matter. From system design to polished UI, I take
               ownership across the full stack and hold high standards for
-              reliability, maintainability, and developer experience.
+              reliability, maintainability, and developer experience. I also
+              integrate AI and LLMs into products — building matching engines,
+              chatbots, and intelligent workflows that solve real user problems.
             </p>
 
             <div className="flex flex-wrap gap-2">
-              {["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Docker", "AWS"].map(
+              {["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Docker", "AWS", "AI / LLMs"].map(
                 (tech) => (
                   <span
                     key={tech}
