@@ -43,7 +43,7 @@ export const projects: Project[] = [
     liveUrl: "https://ayudapay.vercel.app",
     liveUrlLabel: "Demo",
     award: "🏆 1st Place — UP SocComSci Hackathon",
-    year: 2025,
+    year: 2026,
     status: "live",
   },
 ];
