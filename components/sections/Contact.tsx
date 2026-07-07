@@ -18,12 +18,12 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-28">
+    <section id="contact" className="py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6 md:px-10">
         <SectionHeader
           index="04"
-          title="Get In Touch"
-          subtitle="Open to new opportunities, collaborations, and interesting conversations."
+          title="Start a conversation"
+          subtitle="Open to interviews, collaborations, and product engineering opportunities."
         />
 
         <motion.div
@@ -31,49 +31,61 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, ease }}
-          className="space-y-8"
+          className="overflow-hidden rounded-2xl border border-border bg-surface"
         >
+          <div className="border-b border-border bg-surface-elevated px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted sm:px-8">
+            Availability
+          </div>
           {/* Email */}
-          <div className="flex flex-wrap items-center gap-4">
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="link-hover font-display font-semibold text-text-primary transition-colors hover:text-accent"
-              style={{ fontSize: "clamp(1.4rem, 4vw, 2.8rem)", letterSpacing: "-0.02em", lineHeight: 1.1 }}
-            >
-              {siteConfig.email}
-            </a>
-            <button
-              onClick={copyEmail}
-              aria-label="Copy email"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-border transition-all hover:border-border-bright"
-            >
-              <AnimatePresence mode="wait">
-                {copied ? (
-                  <motion.span
-                    key="check"
-                    initial={{ scale: 0.6, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.6, opacity: 0 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                  >
-                    <FiCheck size={13} className="text-accent" />
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key="copy"
-                    initial={{ scale: 0.6, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.6, opacity: 0 }}
-                  >
-                    <FiCopy size={13} className="text-text-secondary" />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
+          <div className="grid gap-6 p-6 md:grid-cols-[1.2fr_0.8fr] md:items-end sm:p-8">
+            <div>
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-accent">
+                Best next step
+              </p>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="break-words font-display font-semibold text-text-primary transition-colors hover:text-accent"
+                style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)", lineHeight: 1.05, letterSpacing: "0" }}
+              >
+                {siteConfig.email}
+              </a>
+            </div>
+
+            <div className="flex flex-wrap gap-3 md:justify-end">
+              <button
+                onClick={copyEmail}
+                aria-label="Copy email"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm text-text-secondary transition-colors hover:border-border-bright hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-accent/40 focus:ring-offset-2 focus:ring-offset-background"
+              >
+                <AnimatePresence mode="wait">
+                  {copied ? (
+                    <motion.span
+                      key="check"
+                      initial={{ scale: 0.6, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.6, opacity: 0 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                    >
+                      <FiCheck size={14} className="text-accent" />
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="copy"
+                      initial={{ scale: 0.6, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.6, opacity: 0 }}
+                    >
+                      <FiCopy size={14} />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                {copied ? "Copied" : "Copy email"}
+              </button>
+            </div>
           </div>
 
           {/* Social */}
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3 border-t border-border px-6 py-5 sm:px-8">
             {[
               { href: siteConfig.github, icon: FiGithub, label: "GitHub" },
               { href: siteConfig.linkedin, icon: FiLinkedin, label: "LinkedIn" },
@@ -83,7 +95,7 @@ export default function Contact() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm text-text-secondary transition-all duration-200 hover:border-border-bright hover:text-text-primary"
+                className="flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm text-text-secondary transition-colors duration-200 hover:border-border-bright hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-accent/40 focus:ring-offset-2 focus:ring-offset-background"
               >
                 <Icon size={14} />
                 {label}

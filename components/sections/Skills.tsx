@@ -9,14 +9,14 @@ const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-28">
+    <section id="skills" className="py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6 md:px-10">
         <SectionHeader
           index="03"
-          title="Tech Stack"
-          subtitle="Tools and technologies I work with regularly."
+          title="Working Stack"
+          subtitle="The tools I use to move from product idea to shipped interface."
         />
-        <div className="flex flex-col gap-10">
+        <div className="grid gap-4 md:grid-cols-2">
           {skills.map((category, ci) => (
             <motion.div
               key={category.category}
@@ -24,11 +24,14 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: ci * 0.08, ease }}
+              className="overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:border-border-bright"
             >
-              <p className="mb-4 font-mono text-xs text-text-secondary">
-                {category.category}
-              </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="border-b border-border bg-surface-elevated px-5 py-4">
+                <p className="font-mono text-xs uppercase tracking-[0.16em] text-accent">
+                  {category.category}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 p-5">
                 {category.items.map((skill) => (
                   <SkillBadge key={skill.name} name={skill.name} />
                 ))}
