@@ -17,26 +17,28 @@ export default function SectionHeader({ index, title, subtitle }: SectionHeaderP
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, ease }}
-      className="mb-14"
+      className="mb-12 grid gap-5 border-t border-border pt-7 md:mb-16 md:grid-cols-[0.22fr_1fr]"
     >
-      <span className="mb-4 block font-mono text-xs text-accent">
+      <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
         {index}
       </span>
-      <h2
-        className="font-display font-semibold text-text-primary"
-        style={{
-          fontSize: "clamp(2rem, 5vw, 3.25rem)",
-          lineHeight: 1.1,
-          letterSpacing: "-0.025em",
-        }}
-      >
-        {title}
-      </h2>
-      {subtitle && (
-        <p className="mt-3 max-w-sm text-sm leading-relaxed text-text-secondary">
-          {subtitle}
-        </p>
-      )}
+      <div>
+        <h2
+          className="font-display font-semibold text-text-primary"
+          style={{
+            fontSize: "clamp(2.2rem, 5vw, 4rem)",
+            lineHeight: 0.98,
+            letterSpacing: "0",
+          }}
+        >
+          {title}
+        </h2>
+        {subtitle && (
+          <p className="mt-4 max-w-xl text-sm leading-7 text-text-secondary">
+            {subtitle}
+          </p>
+        )}
+      </div>
     </motion.div>
   );
 }

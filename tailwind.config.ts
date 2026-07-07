@@ -8,16 +8,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0c0b0a",
-        surface: "#131110",
-        "surface-elevated": "#1a1816",
-        border: "#222020",
-        "border-bright": "#2e2b28",
-        accent: "#b89a6e",
-        "accent-dim": "#9e845c",
-        "text-primary": "#edeae4",
-        "text-secondary": "#605c57",
-        "text-muted": "#26231f",
+        background: "#08090c",
+        surface: "#101217",
+        "surface-elevated": "#171a21",
+        border: "#242833",
+        "border-bright": "#3a4050",
+        accent: "#a996ff",
+        "accent-dim": "#8b8cff",
+        "text-primary": "#f7f8f8",
+        "text-secondary": "#a8adb7",
+        "text-muted": "#687080",
       },
       fontFamily: {
         sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],

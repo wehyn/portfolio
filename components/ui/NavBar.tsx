@@ -14,13 +14,6 @@ const navLinks = [
 
 export default function NavBar() {
   const [activeSection, setActiveSection] = useState("");
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const ids = navLinks.map((l) => l.href.slice(1));
@@ -43,28 +36,25 @@ export default function NavBar() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.1 }}
-      className={cn(
-        "fixed top-0 left-0 right-0 z-40 transition-all duration-500",
-        "bg-transparent"
-      )}
+      className="fixed left-0 right-0 top-0 z-40 bg-transparent"
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5 md:px-10">
         <a
           href="#hero"
-          className="font-display text-base font-semibold text-text-primary transition-colors hover:text-accent"
-          style={{ letterSpacing: "-0.01em" }}
+          className="rounded-full border border-border bg-background px-4 py-2 font-display text-sm font-semibold text-text-primary transition-colors hover:border-border-bright hover:text-accent"
+          style={{ letterSpacing: "0" }}
         >
           {siteConfig.displayName}
         </a>
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-1 rounded-full border border-border bg-surface p-1 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium transition-colors duration-200",
+                "rounded-full px-4 py-2 text-sm font-medium transition-all duration-200",
                 activeSection === link.href.slice(1)
-                  ? "text-text-primary"
+                  ? "bg-background text-text-primary"
                   : "text-text-secondary hover:text-text-primary"
               )}
             >

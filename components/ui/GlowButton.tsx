@@ -22,9 +22,9 @@ export default function GlowButton({
   const base =
     "inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-200 cursor-pointer";
   const solid =
-    "bg-accent text-background hover:bg-accent-dim hover:shadow-[0_0_24px_rgba(6,182,212,0.4)]";
+    "bg-accent text-background hover:bg-accent-dim";
   const outline =
-    "border border-accent text-accent hover:bg-accent/10 hover:shadow-[0_0_24px_rgba(6,182,212,0.2)]";
+    "border border-accent text-accent hover:bg-accent/10";
 
   const classes = cn(base, variant === "solid" ? solid : outline, className);
 

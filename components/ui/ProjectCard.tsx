@@ -25,12 +25,9 @@ export default function ProjectCard({
       {/* Preview */}
       <div
         className={cn(
-          "relative flex-shrink-0 overflow-hidden",
+          "relative flex-shrink-0 overflow-hidden bg-surface-elevated",
           featured ? "h-52 w-full md:h-auto md:w-72" : "h-44 w-full"
         )}
-        style={{
-          background: `linear-gradient(160deg, ${project.accentColor ?? "#b89a6e"}12 0%, ${project.accentColor ?? "#b89a6e"}04 100%)`,
-        }}
       >
         {project.image && (
           // eslint-disable-next-line @next/next/no-img-element
@@ -52,10 +49,10 @@ export default function ProjectCard({
             </span>
           )}
           {project.status === "wip" && (
-            <span className="font-mono text-xs text-amber-400">In progress</span>
+            <span className="font-mono text-xs text-accent">In progress</span>
           )}
           {project.award && (
-            <span className="font-mono text-xs text-amber-400">{project.award}</span>
+            <span className="font-mono text-xs text-accent">{project.award}</span>
           )}
         </div>
 
