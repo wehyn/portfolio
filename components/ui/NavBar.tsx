@@ -38,14 +38,7 @@ export default function NavBar() {
       transition={{ duration: 0.6, delay: 0.1 }}
       className="fixed left-0 right-0 top-0 z-40 bg-transparent"
     >
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5 md:px-10">
-        <a
-          href="#hero"
-          className="rounded-full border border-border bg-background px-4 py-2 font-display text-sm font-semibold text-text-primary transition-colors hover:border-border-bright hover:text-accent"
-          style={{ letterSpacing: "0" }}
-        >
-          {siteConfig.displayName}
-        </a>
+      <div className="mx-auto flex max-w-5xl items-center justify-center px-6 py-5 md:px-10">
         <nav className="hidden items-center gap-1 rounded-full border border-border bg-surface p-1 md:flex">
           {navLinks.map((link) => (
             <a
