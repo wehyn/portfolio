@@ -3,19 +3,15 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
-import SectionHeader from "@/components/ui/SectionHeader";
+
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
 export default function About() {
   return (
-    <section id="about" className="py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6 md:px-10">
-        <SectionHeader
-          index="01"
-          title="Builds with product sense"
-          subtitle="Full-stack execution, polished interfaces, and practical AI features."
-        />
+    <section id="about" className="py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mb-12 border-t border-border pt-7 md:mb-16" />
 
         <div className="grid gap-10 md:grid-cols-[0.72fr_1.28fr] md:gap-16">
           {/* Avatar */}

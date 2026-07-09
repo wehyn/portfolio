@@ -3,19 +3,15 @@
 import { motion } from "framer-motion";
 import { skills } from "@/data/skills";
 import SkillBadge from "@/components/ui/SkillBadge";
-import SectionHeader from "@/components/ui/SectionHeader";
+
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6 md:px-10">
-        <SectionHeader
-          index="03"
-          title="Working Stack"
-          subtitle="The tools I use to move from product idea to shipped interface."
-        />
+    <section id="skills" className="py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mb-12 border-t border-border pt-7 md:mb-16" />
         <div className="grid gap-4 md:grid-cols-2">
           {skills.map((category, ci) => (
             <motion.div
