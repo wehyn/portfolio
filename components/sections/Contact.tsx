@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiCopy, FiCheck, FiGithub, FiLinkedin } from "react-icons/fi";
 import { siteConfig } from "@/data/site";
-import SectionHeader from "@/components/ui/SectionHeader";
+
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -18,13 +18,9 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6 md:px-10">
-        <SectionHeader
-          index="04"
-          title="Start a conversation"
-          subtitle="Open to interviews, collaborations, and product engineering opportunities."
-        />
+    <section id="contact" className="py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mb-12 border-t border-border pt-7 md:mb-16" />
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}

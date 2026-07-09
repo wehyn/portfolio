@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiExternalLink, FiGithub, FiRadio } from "react-icons/fi";
 import { projects } from "@/data/projects";
-import SectionHeader from "@/components/ui/SectionHeader";
+
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/lib/types";
@@ -86,13 +86,9 @@ export default function Projects() {
   const activeProject = orderedProjects.find((p) => p.id === activeId) ?? orderedProjects[0];
 
   return (
-    <section id="projects" className="py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6 md:px-10">
-        <SectionHeader
-          index="02"
-          title="Selected Work"
-          subtitle="A quick, interactive pass through shipped projects, live demos, and source links."
-        />
+    <section id="projects" className="py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mb-12 border-t border-border pt-7 md:mb-16" />
 
         <motion.div
           initial={{ opacity: 0, y: 18 }}
