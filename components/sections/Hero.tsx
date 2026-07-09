@@ -216,7 +216,7 @@ export default function Hero() {
             className="font-display font-bold text-text-primary"
             style={{
               fontSize: "clamp(4.4rem, 12vw, 10rem)",
-              lineHeight: 0.9,
+              lineHeight: 1.15,
               letterSpacing: "0",
             }}
           >
