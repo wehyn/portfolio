@@ -21,6 +21,16 @@ export interface SkillCategory {
   items: { name: string; icon?: string }[];
 }
 
+export interface Certification {
+  id: string;
+  name: string;
+  issuer: string;
+  issued: string;
+  expires?: string;
+  credentialUrl: string;
+  skills?: string[];
+}
+
 export interface SiteConfig {
   name: string;
   displayName: string;
