@@ -6,8 +6,8 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 export default function CursorGlow() {
   const x = useMotionValue(-500);
   const y = useMotionValue(-500);
-  const smoothX = useSpring(x, { stiffness: 90, damping: 28, mass: 0.4 });
-  const smoothY = useSpring(y, { stiffness: 90, damping: 28, mass: 0.4 });
+  const smoothX = useSpring(x, { stiffness: 520, damping: 42, mass: 0.16 });
+  const smoothY = useSpring(y, { stiffness: 520, damping: 42, mass: 0.16 });
 
   useEffect(() => {
     const finePointer = window.matchMedia("(pointer: fine)").matches;
@@ -26,12 +26,13 @@ export default function CursorGlow() {
   return (
     <motion.div
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-0 h-[360px] w-[360px] rounded-full opacity-30 blur-3xl"
+      className="pointer-events-none fixed left-0 top-0 z-0 h-[360px] w-[360px] rounded-full opacity-40 blur-3xl"
       style={{
         x: smoothX,
         y: smoothY,
+        willChange: "transform",
         background:
-          "radial-gradient(circle, rgba(169, 150, 255, 0.34) 0%, rgba(112, 132, 255, 0.18) 45%, rgba(8, 9, 12, 0) 72%)",
+          "radial-gradient(circle, rgba(169, 150, 255, 0.12) 0%, rgba(169, 150, 255, 0.04) 26%, rgba(169, 150, 255, 0) 64%)",
       }}
     />
   );
