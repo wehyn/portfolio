@@ -101,7 +101,7 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.18, ease }}
                 className="ml-[12%] block font-display text-[clamp(4.2rem,10vw,9rem)] font-light italic leading-[0.78] tracking-[-0.055em] text-accent"
               >
-                Garcia.
+                Garcia
               </motion.span>
             </span>
           </h1>
