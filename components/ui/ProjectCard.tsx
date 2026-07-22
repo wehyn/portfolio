@@ -43,8 +43,8 @@ export default function ProjectCard({
             <span className="font-mono text-xs text-text-secondary">{project.year}</span>
           )}
           {project.status === "live" && (
-            <span className="flex items-center gap-1.5 font-mono text-xs text-emerald-400">
-              <span className="h-1 w-1 rounded-full bg-emerald-400" />
+            <span className="flex items-center gap-1.5 font-mono text-xs text-accent">
+              <span className="h-1 w-1 rounded-full bg-accent" />
               Live
             </span>
           )}

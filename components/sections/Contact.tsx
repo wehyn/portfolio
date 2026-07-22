@@ -1,105 +1,52 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FiCopy, FiCheck, FiGithub, FiLinkedin } from "react-icons/fi";
+import { AnimatePresence, motion } from "framer-motion";
+import { FiArrowUpRight, FiCheck, FiCopy } from "react-icons/fi";
 import { siteConfig } from "@/data/site";
-
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
 
-  const copyEmail = async () => {
+  async function copyEmail() {
     await navigator.clipboard.writeText(siteConfig.email);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2200);
-  };
+    window.setTimeout(() => setCopied(false), 2000);
+  }
 
   return (
-    <section id="contact" className="py-28">
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <div className="mb-12 border-t border-border pt-7 md:mb-16" />
+    <section id="contact" className="relative overflow-hidden px-6 pb-20 pt-28 md:px-10 lg:pt-44">
+      <div className="absolute bottom-0 left-1/2 h-[70%] w-[70%] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
+      <motion.div
+        initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7, ease }}
+        className="glass relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] px-6 py-14 sm:px-10 md:py-20 lg:px-20"
+      >
+        <h2 className="sr-only">Contact</h2>
+        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" /> Open channel
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, ease }}
-          className="overflow-hidden rounded-2xl border border-border bg-surface"
-        >
-          <div className="border-b border-border bg-surface-elevated px-6 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted sm:px-8">
-            Availability
+        <div className="mt-8 flex flex-col gap-8 border-t border-border pt-7 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.18em] text-text-muted">Start with an email</p>
+            <a href={`mailto:${siteConfig.email}`} className="break-all text-lg text-text-primary transition-colors hover:text-accent sm:text-2xl">{siteConfig.email}</a>
           </div>
-          {/* Email */}
-          <div className="grid gap-6 p-6 md:grid-cols-[1.2fr_0.8fr] md:items-end sm:p-8">
-            <div>
-              <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-accent">
-                Best next step
-              </p>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="break-words font-display font-semibold text-text-primary transition-colors hover:text-accent"
-                style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)", lineHeight: 1.05, letterSpacing: "0" }}
-              >
-                {siteConfig.email}
-              </a>
-            </div>
-
-            <div className="flex flex-wrap gap-3 md:justify-end">
-              <button
-                onClick={copyEmail}
-                aria-label="Copy email"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm text-text-secondary transition-colors hover:border-border-bright hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-accent/40 focus:ring-offset-2 focus:ring-offset-background"
-              >
-                <AnimatePresence mode="wait">
-                  {copied ? (
-                    <motion.span
-                      key="check"
-                      initial={{ scale: 0.6, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.6, opacity: 0 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                    >
-                      <FiCheck size={14} className="text-accent" />
-                    </motion.span>
-                  ) : (
-                    <motion.span
-                      key="copy"
-                      initial={{ scale: 0.6, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.6, opacity: 0 }}
-                    >
-                      <FiCopy size={14} />
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-                {copied ? "Copied" : "Copy email"}
-              </button>
-            </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <button onClick={copyEmail} className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-text-secondary hover:border-accent/50 hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-accent/50">
+              <AnimatePresence mode="wait" initial={false}>
+                {copied ? <motion.span key="check" initial={{ scale: 0 }} animate={{ scale: 1 }}><FiCheck className="text-accent" /></motion.span> : <motion.span key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }}><FiCopy /></motion.span>}
+              </AnimatePresence>
+              {copied ? "Copied" : "Copy"}
+            </button>
+            <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-sm font-medium text-background transition-transform hover:-translate-y-0.5">
+              LinkedIn <FiArrowUpRight />
+            </a>
           </div>
-
-          {/* Social */}
-          <div className="flex flex-wrap gap-3 border-t border-border px-6 py-5 sm:px-8">
-            {[
-              { href: siteConfig.github, icon: FiGithub, label: "GitHub" },
-              { href: siteConfig.linkedin, icon: FiLinkedin, label: "LinkedIn" },
-            ].map(({ href, icon: Icon, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm text-text-secondary transition-colors duration-200 hover:border-border-bright hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-accent/40 focus:ring-offset-2 focus:ring-offset-background"
-              >
-                <Icon size={14} />
-                {label}
-              </a>
-            ))}
-          </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
