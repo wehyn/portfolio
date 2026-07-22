@@ -2,19 +2,11 @@ import { siteConfig } from "@/data/site";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-background/50 py-8">
-      <div className="mx-auto max-w-5xl px-6 md:px-10">
-        <div className="flex flex-col items-center justify-between gap-3 md:flex-row">
-          <span className="font-display text-sm font-semibold text-text-primary" style={{ letterSpacing: "0" }}>
-            {siteConfig.name}
-          </span>
-          <span className="font-mono text-xs text-text-muted">
-            © {new Date().getFullYear()} / Designed and built with care
-          </span>
-          <a href="#hero" className="rounded-full border border-border px-3 py-1.5 font-mono text-xs text-text-secondary transition-colors hover:border-border-bright hover:text-text-primary">
-            Top
-          </a>
-        </div>
+    <footer className="relative px-6 py-8 md:px-10">
+      <div className="mx-auto flex max-w-7xl flex-col gap-3 border-t border-border pt-6 font-mono text-[9px] uppercase tracking-[0.16em] text-text-muted sm:flex-row sm:items-center sm:justify-between">
+        <span>© {new Date().getFullYear()} {siteConfig.name}</span>
+        <span>Designed in Manila · Built for anywhere</span>
+        <a href="#hero" className="text-text-secondary transition-colors hover:text-accent">Return to signal ↑</a>
       </div>
     </footer>
   );

@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #08090c;
-  --accent: #a996ff;
+  --background: #080807;
+  --accent: #b89a6e;
 }
 
 *, *::before, *::after {
@@ -19,8 +19,11 @@ html {
 
 body {
   background-color: var(--background);
-  background-image: none;
-  color: #f7f8f8;
+  background-image:
+    radial-gradient(ellipse 72% 45% at 88% -8%, rgba(184, 154, 110, 0.16), transparent 64%),
+    radial-gradient(ellipse 60% 42% at 4% 70%, rgba(184, 154, 110, 0.055), transparent 70%);
+  background-attachment: fixed;
+  color: #f2efe8;
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   font-weight: 300;
   line-height: 1.6;
@@ -31,15 +34,15 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(169, 150, 255, 0.26);
-  color: #f7f8f8;
+  background: rgba(184, 154, 110, 0.32);
+  color: #f2efe8;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #08090c; }
-::-webkit-scrollbar-thumb { background: #3a4050; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #687080; }
+::-webkit-scrollbar-track { background: #080807; }
+::-webkit-scrollbar-thumb { background: #4a4539; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #716e67; }
 
 /* Section divider */
 .section-line {
@@ -63,3 +66,36 @@ body {
   transition: width 0.35s ease;
 }
 .link-hover:hover::after { width: 100%; }
+
+.glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.film-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+.text-balance { text-wrap: balance; }
+
+.cinematic-rule {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(184, 154, 110, 0.68), rgba(255, 255, 255, 0.08) 30%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
