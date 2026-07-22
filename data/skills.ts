@@ -5,6 +5,7 @@ export const skills: SkillCategory[] = [
     category: "Frontend",
     items: [
       { name: "React" },
+      { name: "React Native" },
       { name: "Next.js" },
       { name: "TypeScript" },
       { name: "Tailwind CSS" },
@@ -21,6 +22,15 @@ export const skills: SkillCategory[] = [
       { name: "MongoDB" },
       { name: "Redis" },
       { name: "REST APIs" },
+    ],
+  },
+  {
+    category: "AI / LLMs",
+    items: [
+      { name: "Generative AI" },
+      { name: "LLM Integration" },
+      { name: "RAG" },
+      { name: "AI Agents" },
     ],
   },
   {

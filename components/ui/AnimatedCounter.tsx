@@ -44,7 +44,7 @@ export default function AnimatedCounter({ storeId }: { storeId: string }) {
     // Skeleton while loading
     return (
       <div className="flex items-center gap-2">
-        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400/40" />
+        <span className="h-1.5 w-1.5 rounded-full bg-accent/40" />
         <div className="h-3 w-32 animate-pulse rounded bg-surface-elevated" />
       </div>
     );
@@ -52,7 +52,7 @@ export default function AnimatedCounter({ storeId }: { storeId: string }) {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
       <span className="font-mono text-xs text-text-secondary">
         <motion.span className="text-text-primary">{display}</motion.span>
         {" installed users · "}

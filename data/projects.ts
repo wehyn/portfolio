@@ -2,6 +2,21 @@ import type { Project } from "@/lib/types";
 
 export const projects: Project[] = [
   {
+    id: "ayudapay",
+    title: "AyudaPay",
+    description:
+      "A platform that helps Filipinos discover and apply to government programs, scholarships, and LGU benefits they qualify for. An AI matching engine surfaces relevant programs based on a user's profile and circumstances. An integrated AI chatbot guides users through eligibility questions and application steps. Benefit disbursements are settled on the Stellar blockchain for transparent, verifiable payouts.",
+    image: "/images/ayudapay.jpg",
+    tags: ["Next.js", "TypeScript", "AI", "Chatbot", "Stellar", "Blockchain"],
+    accentColor: "#16a34a",
+    githubUrl: "https://github.com/wehyn/ayudamatch",
+    liveUrl: "https://ayudapay.vercel.app",
+    liveUrlLabel: "Demo",
+    award: "🏆 1st Place — UP SocComSci Hackathon",
+    year: 2026,
+    status: "live",
+  },
+  {
     id: "quiz-fetch",
     title: "Quiz Fetch",
     description:
@@ -29,21 +44,6 @@ export const projects: Project[] = [
     liveUrl: "https://startup-language.vercel.app/",
     liveUrlLabel: "Demo",
     year: 2025,
-    status: "live",
-  },
-  {
-    id: "ayudapay",
-    title: "AyudaPay",
-    description:
-      "A platform that helps Filipinos discover and apply to government programs, scholarships, and LGU benefits they qualify for. An AI matching engine surfaces relevant programs based on a user's profile and circumstances. An integrated AI chatbot guides users through eligibility questions and application steps. Benefit disbursements are settled on the Stellar blockchain for transparent, verifiable payouts.",
-    image: "/images/ayudapay.jpg",
-    tags: ["Next.js", "TypeScript", "AI", "Chatbot", "Stellar", "Blockchain"],
-    accentColor: "#16a34a",
-    githubUrl: "https://github.com/wehyn/ayudamatch",
-    liveUrl: "https://ayudapay.vercel.app",
-    liveUrlLabel: "Demo",
-    award: "🏆 1st Place — UP SocComSci Hackathon",
-    year: 2026,
     status: "live",
   },
 ];
