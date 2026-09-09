@@ -57,7 +57,7 @@ export default function Projects() {
                       />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent" />
-                    <span className="glass absolute bottom-4 left-4 rounded-full px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-text-secondary">
+                    <span className="absolute bottom-4 left-4 rounded-full border border-border-bright bg-background/90 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-text-primary shadow-lg shadow-background/30 backdrop-blur-md">
                       {project.year} · {project.status}
                     </span>
                   </div>
