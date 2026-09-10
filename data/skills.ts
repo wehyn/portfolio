@@ -21,7 +21,6 @@ export const skills: SkillCategory[] = [
       { name: "PostgreSQL" },
       { name: "MongoDB" },
       { name: "Redis" },
-      { name: "REST APIs" },
     ],
   },
   {
@@ -42,6 +41,9 @@ export const skills: SkillCategory[] = [
       { name: "GitHub Actions" },
       { name: "Linux" },
       { name: "Figma" },
+      { name: "Kotlin" },
+      { name: "REST API" },
+      { name: "Postman" },
     ],
   },
 ];

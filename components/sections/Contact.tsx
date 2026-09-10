@@ -1,52 +1,115 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { FiArrowUpRight, FiCheck, FiCopy } from "react-icons/fi";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { FiArrowUpRight, FiCheck, FiCopy, FiGithub, FiLinkedin } from "react-icons/fi";
 import { siteConfig } from "@/data/site";
+import Footer from "@/components/layout/Footer";
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
+type CopyState = "idle" | "copied" | "failed";
 
 export default function Contact() {
-  const [copied, setCopied] = useState(false);
+  const [copyState, setCopyState] = useState<CopyState>("idle");
+  const copyTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimer.current !== null) window.clearTimeout(copyTimer.current);
+    };
+  }, []);
 
   async function copyEmail() {
-    await navigator.clipboard.writeText(siteConfig.email);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2000);
+    if (copyTimer.current !== null) window.clearTimeout(copyTimer.current);
+
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
+      await navigator.clipboard.writeText(siteConfig.email);
+      setCopyState("copied");
+    } catch {
+      setCopyState("failed");
+    }
+
+    copyTimer.current = window.setTimeout(() => setCopyState("idle"), 2600);
   }
 
   return (
-    <section id="contact" className="relative overflow-hidden px-6 pb-20 pt-28 md:px-10 lg:pt-44">
-      <div className="absolute bottom-0 left-1/2 h-[70%] w-[70%] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
-      <motion.div
-        initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7, ease }}
-        className="glass relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] px-6 py-14 sm:px-10 md:py-20 lg:px-20"
-      >
-        <h2 className="sr-only">Contact</h2>
-        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" /> Open channel
+    <motion.section
+      id="contact"
+      aria-labelledby="contact-heading"
+      className="story-panel px-5 pb-8 pt-16 sm:px-8 lg:px-16 lg:py-10"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease }}
+    >
+      <div className="mx-auto flex min-h-[calc(100dvh-8rem)] max-w-[1440px] flex-col justify-center">
+        <div className="grid items-end gap-10 lg:grid-cols-[0.62fr_0.38fr] lg:gap-20">
+          <div>
+            <h2
+              id="contact-heading"
+              className="max-w-[10ch] font-display text-[clamp(3.5rem,7vw,8rem)] font-semibold leading-[0.88] tracking-[-0.07em] text-text-primary"
+            >
+              Have a problem worth solving?
+            </h2>
+          </div>
+
+          <div className="surface-card rounded-[1.75rem] p-5 sm:p-7">
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="block break-all text-lg font-semibold tracking-[-0.02em] text-text-primary transition-colors hover:text-accent sm:text-xl"
+            >
+              {siteConfig.email}
+            </a>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="inline-flex items-center gap-2 rounded-full bg-text-primary px-4 py-2.5 text-xs font-semibold text-surface transition-colors hover:bg-accent hover:text-text-primary"
+              >
+                Email Wayne <FiArrowUpRight aria-hidden="true" />
+              </a>
+              <button
+                type="button"
+                onClick={copyEmail}
+                className="inline-flex items-center gap-2 rounded-full border border-border-bright bg-surface px-4 py-2.5 text-xs font-semibold text-text-primary transition-colors hover:border-accent hover:text-accent"
+              >
+                {copyState === "copied" ? <FiCheck aria-hidden="true" /> : <FiCopy aria-hidden="true" />}
+                {copyState === "copied" ? "Copied" : copyState === "failed" ? "Try again" : "Copy email"}
+              </button>
+            </div>
+
+            <p role="status" aria-live="polite" className="mt-3 min-h-4 font-mono text-[9px] uppercase tracking-[0.1em] text-text-muted">
+              {copyState === "copied"
+                ? "Email copied to clipboard."
+                : copyState === "failed"
+                  ? "Copy unavailable — select the address above."
+                  : ""}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-2 border-t border-border pt-5">
+              <a
+                href={siteConfig.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-xs font-semibold text-text-secondary transition-colors hover:border-accent hover:text-accent"
+              >
+                <FiLinkedin aria-hidden="true" /> LinkedIn
+              </a>
+              <a
+                href={siteConfig.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-xs font-semibold text-text-secondary transition-colors hover:border-accent hover:text-accent"
+              >
+                <FiGithub aria-hidden="true" /> GitHub
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-8 border-t border-border pt-7 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.18em] text-text-muted">Start with an email</p>
-            <a href={`mailto:${siteConfig.email}`} className="break-all text-lg text-text-primary transition-colors hover:text-accent sm:text-2xl">{siteConfig.email}</a>
-          </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <button onClick={copyEmail} className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-text-secondary hover:border-accent/50 hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-accent/50">
-              <AnimatePresence mode="wait" initial={false}>
-                {copied ? <motion.span key="check" initial={{ scale: 0 }} animate={{ scale: 1 }}><FiCheck className="text-accent" /></motion.span> : <motion.span key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }}><FiCopy /></motion.span>}
-              </AnimatePresence>
-              {copied ? "Copied" : "Copy"}
-            </button>
-            <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-sm font-medium text-background transition-transform hover:-translate-y-0.5">
-              LinkedIn <FiArrowUpRight />
-            </a>
-          </div>
-        </div>
-      </motion.div>
-    </section>
+        <Footer />
+      </div>
+    </motion.section>
   );
 }

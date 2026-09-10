@@ -2,34 +2,28 @@
 
 import { motion } from "framer-motion";
 
-const ease = [0.25, 0.46, 0.45, 0.94] as const;
-
-const disciplines = [
-  ["Product thinking", "I begin with the friction, not the feature list."],
-  ["Full-stack craft", "Interfaces, systems, and the details between them."],
-  ["Intelligent tools", "AI that earns its place by making work simpler."],
-];
-
 export default function About() {
   return (
-    <section id="about" className="relative px-6 py-28 md:px-10 lg:py-44">
-      <div className="mx-auto max-w-7xl">
-        <h2 className="sr-only">About</h2>
-        <div className="grid gap-px overflow-hidden rounded-3xl border border-border bg-border md:grid-cols-3">
-          {disciplines.map(([title, copy], index) => (
-            <motion.article
-              key={title}
-              initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.55, delay: index * 0.1, ease }}
-              className="group relative bg-background/80 p-7 backdrop-blur-md sm:p-9"
+    <motion.section
+      id="about"
+      aria-labelledby="about-heading"
+      className="story-panel px-5 py-16 sm:px-8 lg:px-16 lg:py-10"
+    >
+      <div className="mx-auto flex min-h-[calc(100dvh-8rem)] max-w-[1440px] flex-col justify-center">
+        <div className="grid gap-8 lg:grid-cols-[0.45fr_0.55fr] lg:items-end lg:gap-20">
+          <div>
+            <h2
+              id="about-heading"
+              className="max-w-[13ch] font-display text-[clamp(2.7rem,5vw,5.4rem)] font-semibold leading-[0.95] tracking-[-0.06em] text-text-primary"
             >
-              <span className="font-mono text-[10px] tracking-[0.2em] text-text-muted">0{index + 1}</span>
-              <h3 className="mt-12 font-display text-2xl font-light text-text-primary transition-colors group-hover:text-accent">{title}</h3>
-              <p className="mt-3 max-w-xs text-sm leading-6 text-text-secondary">{copy}</p>
-            </motion.article>
-          ))}
+              Make the complicated feel considered.
+            </h2>
+          </div>
+          <p className="max-w-2xl text-base leading-7 text-text-secondary sm:text-lg">
+            I bring a product-minded approach to engineering, bridging technical execution with a clear and useful experience for the people on the other side of the screen.
+          </p>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
