@@ -25,7 +25,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${siteConfig.displayName} — ${siteConfig.title}`,
+  title: "Wayne Garcia",
   description: siteConfig.bio,
   openGraph: {
     title: `${siteConfig.displayName} — ${siteConfig.title}`,
