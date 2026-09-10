@@ -7,23 +7,15 @@ import StoryAnchor from "@/components/ui/StoryAnchor";
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
-function ProfileFrame() {
+function ProfileImage() {
   return (
-    <div className="surface-card overflow-hidden rounded-[2rem] p-3 sm:p-4">
-      <div className="relative overflow-hidden rounded-[1.5rem] bg-background px-6 pb-7 pt-8 sm:px-10 sm:pt-10">
-        <div className="absolute right-[-12%] top-[-22%] h-56 w-56 rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
-        <div className="relative mx-auto flex aspect-square max-w-[340px] items-end justify-center rounded-[35%] border border-border bg-surface-elevated">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/memoji.png"
-            alt="Wayne Garcia's Memoji portrait"
-            className="h-[92%] w-[82%] object-contain"
-          />
-          <span className="absolute bottom-4 left-4 rounded-full bg-surface px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.14em] text-text-secondary shadow-card">
-            WG · Manila
-          </span>
-        </div>
-      </div>
+    <div className="mx-auto flex w-full max-w-[300px] items-end justify-center">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/memoji.png"
+        alt="Wayne Garcia's Memoji portrait"
+        className="h-auto max-h-[min(55vh,400px)] w-full object-contain"
+      />
     </div>
   );
 }
@@ -84,7 +76,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.22, ease }}
           className="mx-auto w-full max-w-[620px]"
         >
-          <ProfileFrame />
+          <ProfileImage />
         </motion.div>
       </div>
     </motion.section>
