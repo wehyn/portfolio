@@ -19,6 +19,7 @@ export const projects: Project[] = [
   {
     id: "quiz-fetch",
     title: "Quiz Fetch",
+    liveUrlLabel: "Chrome",
     description:
       "A Chrome extension that captures Canvas LMS quiz questions in real time through a MutationObserver pipeline, classifies question types, and uses the Canvas Submissions API to overlay answer markers. It exports the question bank to the clipboard or HTML, with Firefox and website versions also available.",
     image: "/images/quizfetch.jpg",
