@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { skills } from "@/data/skills";
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
+const marqueeText = "Design · Engineer · Iterate · Ship";
+const marqueeCopies = Array.from({ length: 4 }, (_, index) => index);
 
 export default function Skills() {
   return (
@@ -31,10 +33,16 @@ export default function Skills() {
 
       <motion.div
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
-        className="mt-28 whitespace-nowrap border-y border-border py-5 font-display text-4xl font-light italic text-text-muted/20 sm:text-6xl"
+        className="mt-28 overflow-hidden whitespace-nowrap border-y border-border py-5 font-display text-4xl font-light italic text-text-muted/20 sm:text-6xl"
         aria-hidden="true"
       >
-        Design · Engineer · Iterate · Ship · Design · Engineer · Iterate · Ship
+        <div className="marquee-track flex w-max">
+          {marqueeCopies.map((copy) => (
+            <span key={copy} className="block shrink-0 pr-10">
+              {marqueeText}
+            </span>
+          ))}
+        </div>
       </motion.div>
     </section>
   );
