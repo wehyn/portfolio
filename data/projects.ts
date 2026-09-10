@@ -5,7 +5,7 @@ export const projects: Project[] = [
     id: "ayudapay",
     title: "AyudaPay",
     description:
-      "A platform that helps Filipinos discover and apply to government programs, scholarships, and LGU benefits they qualify for. An AI matching engine surfaces relevant programs based on a user's profile and circumstances. An integrated AI chatbot guides users through eligibility questions and application steps. Benefit disbursements are settled on the Stellar blockchain for transparent, verifiable payouts.",
+      "A platform helping Filipinos discover and apply to government programs, scholarships, and LGU benefits they qualify for. AI matching, an eligibility chatbot, and Stellar-based disbursements bring discovery, guidance, and payouts into one flow.",
     image: "/images/ayudapay.jpg",
     tags: ["Next.js", "TypeScript", "AI", "Chatbot", "Stellar", "Blockchain"],
     accentColor: "#16a34a",
@@ -20,7 +20,7 @@ export const projects: Project[] = [
     id: "quiz-fetch",
     title: "Quiz Fetch",
     description:
-      "Engineered a Chrome extension that reverse-engineers Canvas LMS's quiz flow — capturing questions in real time using a MutationObserver pipeline, necessary because Canvas swaps questions via AJAX without page reloads, making load-time scraping insufficient. A regex classifier detects question type (multiple choice, matching, fill-in, essay), and a two-pass fetch against the Canvas Submissions API retroactively overlays correct/incorrect markers that Canvas intentionally withholds from the live DOM. Exports the full question bank to clipboard or HTML.",
+      "A Chrome extension that captures Canvas LMS quiz questions in real time through a MutationObserver pipeline, classifies question types, and uses the Canvas Submissions API to overlay answer markers. It exports the question bank to the clipboard or HTML, with Firefox and website versions also available.",
     image: "/images/quizfetch.jpg",
     tags: ["Chrome Extension", "JavaScript", "Python", "Canvas LMS"],
     accentColor: "#4f46e5",
@@ -37,7 +37,7 @@ export const projects: Project[] = [
     id: "startup-language",
     title: "Startup Language",
     description:
-      "An interactive browser-based compiler playground for the .startup DSL that visualizes the full compilation pipeline — tokenization, parsing, AST construction, semantic analysis, IR generation, and execution — with a live code editor. Error recovery uses phrase-level and panic-mode strategies. Runtime inspector shows execution timeline, stack state, and program output.",
+      "An interactive browser-based compiler playground for the .startup DSL, visualizing tokenization, parsing, AST construction, semantic analysis, IR generation, and execution. A live editor, error recovery, and runtime inspector make the pipeline inspectable.",
     image: "/images/startup-language.jpg",
     tags: ["TypeScript", "Next.js", "Compiler Design", "React"],
     accentColor: "#7c3aed",
