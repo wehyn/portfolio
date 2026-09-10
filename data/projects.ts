@@ -12,7 +12,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/wehyn/ayudamatch",
     liveUrl: "https://ayudapay.vercel.app",
     liveUrlLabel: "Demo",
-    award: "🏆 1st Place — UP SocComSci Hackathon",
+    award: "🏆 Champion — UP SocComSci Hackathon",
     year: 2026,
     status: "live",
   },
