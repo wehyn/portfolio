@@ -1,8 +1,6 @@
 # Wayne Garcia — Portfolio
 
-> Single-page portfolio built with Next.js 14, Fraunces serif, and a warm minimal dark aesthetic.
-
-&nbsp;
+> Single-page portfolio built with Next.js 14, DM Sans, and a light product-oriented visual system.
 
 ## Stack
 
@@ -10,14 +8,12 @@
 |---|---|
 | **Framework** | Next.js 14 (App Router) |
 | **Language** | TypeScript (strict) |
-| **Styling** | Tailwind CSS v3 (custom color tokens) |
+| **Styling** | Tailwind CSS v3 (semantic color tokens) |
 | **Animation** | Framer Motion 11 |
-| **Fonts** | Fraunces · DM Sans · IBM Plex Mono |
+| **Smooth scroll** | Lenis 1.3.26 (desktop stage only) |
+| **Fonts** | DM Sans · IBM Plex Mono |
 | **Icons** | react-icons (Feather) |
 | **Deploy** | Vercel |
-| **CI** | GitHub Actions (typecheck + lint) |
-
-&nbsp;
 
 ## Getting Started
 
@@ -30,91 +26,80 @@ npm run typecheck  # tsc --noEmit
 npm run lint       # ESLint (Next.js core-web-vitals)
 ```
 
-&nbsp;
-
 ## Architecture
 
-Single-page layout — all sections anchor-linked via `id` with scroll-spy navigation:
+The homepage is a single semantic route with eight story panels: hero, approach, three project panels, skills, certifications, and contact/footer.
 
-```
+On screens at least 1024px wide, `HorizontalStory` measures the track and maps normal document scroll to horizontal panel movement inside a sticky viewport. Lenis smooths the document scroll with `autoRaf: false` and a manually driven frame loop. Screens below the breakpoint, reduced-motion users, and any stage that cannot initialize receive normal vertical document flow.
+
+Meaningful content is rendered in the DOM before the stage initializes, so the page remains readable without JavaScript. Internal panel links use the measured horizontal offset on desktop and native anchors elsewhere.
+
+```text
 app/
-├── layout.tsx        # Root layout (fonts, metadata, fonts)
-└── page.tsx          # Hero → About → Projects → Skills → Contact
+├── layout.tsx        # Root layout, fonts, metadata
+├── page.tsx          # Single route and story composition
+└── globals.css       # Light tokens, surfaces, stage/fallback styles
+
+components/
+├── layout/
+│   ├── Footer.tsx            # Contact-panel footer
+│   ├── HorizontalStory.tsx   # Measured desktop stage and Lenis loop
+│   └── PageWrapper.tsx       # Reusable content wrapper
+├── sections/
+│   ├── Hero.tsx
+│   ├── About.tsx
+│   ├── Projects.tsx          # One panel per project
+│   ├── Skills.tsx
+│   ├── Certifications.tsx
+│   └── Contact.tsx
+└── ui/
+    ├── AnimatedCounter.tsx   # Chrome Web Store stats
+    ├── BrowserFrame.tsx      # Screenshot framing
+    ├── NavBar.tsx
+    ├── PanelLabel.tsx
+    ├── StatusPill.tsx
+    └── StoryAnchor.tsx        # Desktop-aware internal anchors
 ```
-
-**Section dividers** (`.section-line`) separate each block. A `ScrollProgress` bar tracks reading position at the top, and a `NavBar` uses `IntersectionObserver` for scroll-spy active state.
-
-&nbsp;
 
 ## Customization
 
-All content lives in `data/` — no need to touch components.
+All portfolio content lives in `data/`:
 
-```
+```text
 data/
-├── site.ts        # name, displayName, title, subtitles, bio, email, GitHub, LinkedIn
-├── projects.ts    # project cards — image, tags, links, accentColor, chromeStoreId
-└── skills.ts      # skill categories — Frontend, Backend, Tools & Infra
+├── site.ts            # name, title, bio, email, GitHub, LinkedIn
+├── projects.ts        # project descriptions, screenshots, tags, links, facts
+├── skills.ts          # skill categories and items
+└── certifications.ts  # issuer, dates, skills, credential links
 ```
 
-Update `site.ts` for bio/social links, `projects.ts` for portfolio entries (set `featured: true` for full-width), and `skills.ts` for tech stack categories.
+Keep project and skills content in these files rather than duplicating it in visual components. Existing project screenshots are stored in `public/images/`.
 
-&nbsp;
+## Design direction
 
-## Design
-
-- **Background** — warm `#0c0b0a` with fixed radial gradient (amber top-right, shadow bottom-left)
-- **Accent** — caramel `#b89a6e` with `accent-dim` variant `#9e845c`
-- **Surfaces** — `surface` (#131110), `surface-elevated` (#1a1816), `border` (#222020), `border-bright` (#2e2b28)
-- **Text** — `text-primary` (#edeae4), `text-secondary` (#605c57), `text-muted` (#26231f)
-- **Type scale** — Fraunces 800 for display, DM Sans 300 for body (1.6 line-height), IBM Plex Mono 400 for labels/tags
-- **Motion** — viewport-triggered fade-ups with `whileInView`, `once: true`, custom ease `[0.25, 0.46, 0.45, 0.94]`
-- **Decorations** — floating gradient orbs (cyan/purple, 0.045–0.07 opacity), thin custom scrollbar, selection highlighting, `link-hover` underline effect
-
-&nbsp;
+- Light gray canvas with white rounded surfaces and quiet borders
+- Restrained orange accent for active details and availability markers
+- DM Sans for interface copy and IBM Plex Mono for metadata
+- Short, purposeful entrance motion with a reduced-motion fallback
+- Project proof, links, awards, and live extension statistics prioritized over decoration
+- Minimal fixed identity/CTA header with native keyboard focus states
 
 ## API
 
-**`/api/extension-stats?id=<chrome-store-id>`** — Scrapes the Chrome Web Store listing page for extension metrics (user count, rating, rating count). Cached for 24 hours via ISR (`revalidate: 86400`). Falls back to static defaults on failure.
+**`/api/extension-stats?id=<chrome-store-id>`** scrapes the Chrome Web Store listing for extension metrics and caches the response for 24 hours via ISR (`revalidate: 86400`). It returns static fallback values if the upstream listing is unavailable. The route remains unchanged by the visual redesign.
 
-Used by `AnimatedCounter` on the Quiz Fetch project card to display live install count.
+## Verification
 
-&nbsp;
-
-## Components
-
-```
-components/
-├── layout/
-│   ├── Footer.tsx          # Copyright, tagline, back-to-top link
-│   └── PageWrapper.tsx     # Max-width content container
-├── sections/
-│   ├── Hero.tsx            # Name + cycling role titles + CTAs
-│   ├── About.tsx           # Memoji + bio + tech tags
-│   ├── Projects.tsx        # Featured + grid project cards
-│   ├── Skills.tsx          # Categorized skill badges
-│   └── Contact.tsx         # Email (clipboard copy) + social links
-├── ui/
-│   ├── AnimatedCounter.tsx  # Animated Chrome Web Store user count
-│   ├── BackgroundOrbs.tsx   # Floating decorative gradient orbs
-│   ├── GlowButton.tsx       # Solid/outline button with glow hover
-│   ├── NavBar.tsx           # Fixed top nav (IntersectionObserver)
-│   ├── ProjectCard.tsx      # Project card (featured/grid variants)
-│   ├── ScrollProgress.tsx   # Reading progress bar (useScroll + useSpring)
-│   ├── SectionHeader.tsx    # Consistent section heading
-│   └── SkillBadge.tsx       # Skill tag pill
+```bash
+npm run lint
+npx tsc --noEmit --incremental false
+npm run build
+git diff --check
 ```
 
-&nbsp;
+The desktop stage should be checked at 1440×900 and 1024×768, with normal vertical flow checked at 768×1024 and 390×844. Also verify reduced motion, keyboard focus, image loading, internal panel links, contact-copy feedback, and the Quiz Fetch stats fallback.
 
-## CI
-
-GitHub Actions runs on push to `main` and all PRs:
-
-- **TypeScript** — `tsc --noEmit` (strict mode)
-- **ESLint** — Next.js core-web-vitals preset
-
-&nbsp;
+The separate `THREEJS_PROJECT_TRACK_PLAN.md` is intentionally unrelated to this homepage redesign.
 
 ---
 
