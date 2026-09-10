@@ -12,7 +12,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/wehyn/ayudamatch",
     liveUrl: "https://ayudapay.vercel.app",
     liveUrlLabel: "Demo",
-    award: "🏆 1st Place — UP SocComSci Hackathon",
+    award: "🏆 Champion — UP SocComSci Hackathon",
     year: 2026,
     status: "live",
   },
@@ -27,6 +27,7 @@ export const projects: Project[] = [
     liveUrl:
       "https://chromewebstore.google.com/detail/quiz-fetch/ddkacjpcbjcnbnhijggkdgfemmogpiil",
     firefoxUrl: "https://addons.mozilla.org/en-US/firefox/addon/quiz-fetch/",
+    websiteUrl: "https://quiz-fetch.vercel.app/",
     chromeStoreId: "ddkacjpcbjcnbnhijggkdgfemmogpiil",
     featured: true,
     year: 2025,

@@ -9,6 +9,7 @@ export interface Project {
   liveUrl?: string;
   liveUrlLabel?: string;
   firefoxUrl?: string;
+  websiteUrl?: string;
   featured?: boolean;
   year?: number;
   status?: "live" | "wip" | "archived";
