@@ -13,17 +13,17 @@ export default function Certifications() {
       aria-labelledby="certifications-heading"
       className="story-panel px-5 py-16 sm:px-8 lg:px-16 lg:py-10"
     >
-      <div className="mx-auto grid min-h-[calc(100dvh-8rem)] max-w-[1440px] items-center gap-10 lg:grid-cols-[0.32fr_0.68fr] lg:gap-16">
+      <div className="mx-auto grid min-h-[calc(100dvh-8rem)] max-w-[1440px] items-center gap-16 lg:grid-cols-[0.42fr_0.58fr] lg:gap-20">
         <div>
           <h2
             id="certifications-heading"
             className="max-w-[10ch] font-display text-[clamp(3rem,5.5vw,6rem)] font-semibold leading-[0.9] tracking-[-0.065em] text-text-primary"
           >
-            Keep learning. Keep shipping.
+            Certificates.
           </h2>
         </div>
 
-        <div className="surface-card divide-y divide-border overflow-hidden rounded-[1.75rem] lg:translate-y-4">
+        <div className="surface-card divide-y divide-border overflow-hidden rounded-[1.75rem] sm:ml-8 lg:ml-0 lg:translate-y-4">
           {certifications.map((certification, index) => (
             <motion.a
               key={certification.id}
