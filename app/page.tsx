@@ -1,30 +1,26 @@
 import NavBar from "@/components/ui/NavBar";
-import ScrollProgress from "@/components/ui/ScrollProgress";
-import CursorGlow from "@/components/ui/CursorGlow";
+import HorizontalStory from "@/components/layout/HorizontalStory";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
 import Certifications from "@/components/sections/Certifications";
 import Contact from "@/components/sections/Contact";
-import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
     <>
-      <div className="film-grain" aria-hidden="true" />
-      <CursorGlow />
-      <ScrollProgress />
       <NavBar />
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Certifications />
-        <Contact />
+      <main id="main-content">
+        <HorizontalStory>
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <Certifications />
+          <Contact />
+        </HorizontalStory>
       </main>
-      <Footer />
     </>
   );
 }
