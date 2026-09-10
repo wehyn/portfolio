@@ -18,8 +18,13 @@ function ProjectLinks({ project }: { project: Project }) {
         </a>
       )}
       {project.firefoxUrl && (
-        <a href={project.firefoxUrl} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary">
-          Firefox <FiArrowUpRight className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        <a href={project.firefoxUrl} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-sm text-text-primary">
+          Firefox <FiArrowUpRight className="text-accent transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </a>
+      )}
+      {project.websiteUrl && (
+        <a href={project.websiteUrl} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-sm text-text-primary">
+          Website <FiArrowUpRight className="text-accent transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </a>
       )}
       {project.githubUrl && (

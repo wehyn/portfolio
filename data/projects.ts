@@ -27,6 +27,7 @@ export const projects: Project[] = [
     liveUrl:
       "https://chromewebstore.google.com/detail/quiz-fetch/ddkacjpcbjcnbnhijggkdgfemmogpiil",
     firefoxUrl: "https://addons.mozilla.org/en-US/firefox/addon/quiz-fetch/",
+    websiteUrl: "https://quiz-fetch.vercel.app/",
     chromeStoreId: "ddkacjpcbjcnbnhijggkdgfemmogpiil",
     featured: true,
     year: 2025,
