@@ -1,9 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
 import { siteConfig } from "@/data/site";
-import StoryAnchor from "@/components/ui/StoryAnchor";
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -36,8 +34,8 @@ export default function Hero() {
             transition={{ duration: 0.75, ease }}
             className="max-w-[11ch] font-display text-[clamp(3.3rem,6.4vw,6.3rem)] font-semibold leading-[0.92] tracking-[-0.065em] text-text-primary"
           >
-            Build with clarity.
-            <span className="mt-2 block text-accent">Ship with care.</span>
+            Wayne{" "}
+            <span className="mt-2 block">Garcia</span>
           </motion.h1>
 
           <motion.p
@@ -48,26 +46,6 @@ export default function Hero() {
           >
             {siteConfig.bio}
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease }}
-            className="mt-9 flex flex-wrap gap-3"
-          >
-            <StoryAnchor
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-text-primary px-5 py-3 text-sm font-semibold text-surface transition-transform hover:-translate-y-0.5 hover:bg-accent hover:text-text-primary"
-            >
-              Let&apos;s talk <FiArrowUpRight aria-hidden="true" />
-            </StoryAnchor>
-            <StoryAnchor
-              href="#projects"
-              className="inline-flex items-center gap-2 rounded-full border border-border-bright bg-surface px-5 py-3 text-sm font-semibold text-text-primary transition-colors hover:border-accent hover:text-accent"
-            >
-              See selected work <FiArrowDownRight aria-hidden="true" />
-            </StoryAnchor>
-          </motion.div>
         </div>
 
         <motion.div

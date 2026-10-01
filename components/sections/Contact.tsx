@@ -43,8 +43,8 @@ export default function Contact() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.7, ease }}
     >
-      <div className="mx-auto flex min-h-[calc(100dvh-8rem)] max-w-[1440px] flex-col justify-center">
-        <div className="grid items-end gap-10 lg:grid-cols-[0.62fr_0.38fr] lg:gap-20">
+      <div className="mx-auto flex min-h-[calc(100dvh-8rem)] max-w-[1440px] flex-col">
+        <div className="my-auto grid items-end gap-10 lg:grid-cols-[0.62fr_0.38fr] lg:gap-20">
           <div>
             <h2
               id="contact-heading"
