@@ -116,6 +116,7 @@ const count = projects.length;
 export default function Projects() {
   const wrapRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const [stageEnabled, setStageEnabled] = useState(false);
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -138,14 +139,23 @@ export default function Projects() {
         const offset = parseFloat(stage.style.getPropertyValue("--story-offset")) || 0;
         const left = parseFloat(wrap.style.getPropertyValue("--stage-left")) || 0;
         const next = Math.min(count - 1, Math.max(0, Math.round((offset - left) / window.innerWidth)));
-        setActive(next);
+        setActive((current) => current === next ? current : next);
+        frame = requestAnimationFrame(tick);
       }
-      frame = requestAnimationFrame(tick);
     };
-    frame = requestAnimationFrame(tick);
+    const syncEnabled = () => {
+      const enabled = stage.dataset.stageEnabled === "true";
+      setStageEnabled(enabled);
+      cancelAnimationFrame(frame);
+      if (enabled) frame = requestAnimationFrame(tick);
+    };
+    const stageObserver = new MutationObserver(syncEnabled);
+    stageObserver.observe(stage, { attributes: true, attributeFilter: ["data-stage-enabled"] });
+    syncEnabled();
 
     return () => {
       observer.disconnect();
+      stageObserver.disconnect();
       cancelAnimationFrame(frame);
     };
   }, []);
@@ -160,28 +170,30 @@ export default function Projects() {
       className="stage-wrap"
       style={{ "--stage-count": count } as CSSProperties}
     >
-      <div className="stage-stacked">
-        {projects.map((project) => (
-          <div key={project.id} className="story-panel px-5 py-16 sm:px-8 lg:px-16 lg:py-10">
-            <ProjectContent project={project} />
-          </div>
-        ))}
-      </div>
-
-      <div className="stage-pinned px-5 sm:px-8 lg:px-16" aria-live="polite">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current.id}
-            className="w-full"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.35, ease }}
-          >
-            <ProjectContent project={current} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
+      {stageEnabled ? (
+        <div className="stage-pinned px-5 sm:px-8 lg:px-16">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              className="w-full"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.35, ease }}
+            >
+              <ProjectContent project={current} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      ) : (
+        <div className="stage-stacked">
+          {projects.map((project) => (
+            <div key={project.id} className="story-panel px-5 py-16 sm:px-8 lg:px-16 lg:py-10">
+              <ProjectContent project={project} />
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
