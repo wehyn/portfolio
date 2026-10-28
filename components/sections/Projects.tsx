@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { FiArrowUpRight, FiGithub } from "react-icons/fi";
 import { projects } from "@/data/projects";
 import type { Project } from "@/lib/types";
@@ -50,82 +51,149 @@ function ProjectLinks({ project }: { project: Project }) {
 function frameLabel(project: Project) {
   if (project.id === "quiz-fetch") return "Chrome extension · Canvas LMS";
   if (project.id === "startup-language") return "Browser playground · .startup DSL";
+  if (project.id === "porto") return "macOS menu-bar app";
+  if (project.id === "nimbus") return "Self-hosted dashboard";
   return "Web product · live preview";
 }
 
-function ProjectPanel({ project, index }: { project: Project; index: number }) {
-  const reversed = index % 2 === 1;
-
+function ProjectContent({ project }: { project: Project }) {
   return (
-    <motion.section
-      id={index === 0 ? "projects" : project.id}
-      aria-labelledby={`${project.id}-heading`}
-      className="story-panel px-5 py-16 sm:px-8 lg:px-16 lg:py-10"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.65, ease }}
-    >
-      <div className="mx-auto flex min-h-[calc(100dvh-8rem)] max-w-[1440px] flex-col justify-center">
-        <div className={`grid items-center gap-9 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.72fr)] lg:gap-16 ${reversed ? "lg:[&>div:first-child]:order-2" : ""}`}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.75, delay: 0.08, ease }}
-            className="group"
+    <div className="mx-auto flex min-h-[calc(100dvh-8rem)] w-full max-w-[1440px] flex-col justify-center">
+      <div className="grid items-center gap-9 lg:grid-cols-[minmax(320px,0.72fr)_minmax(0,1.08fr)] lg:gap-16 lg:[&>div:first-child]:order-2">
+        <div className="relative">
+          <BrowserFrame
+            src={project.image ?? ""}
+            images={project.images}
+            accent={project.accentColor}
+            alt={`${project.title} interface screenshot`}
+            label={frameLabel(project)}
+          />
+          {project.chromeStoreId && (
+            <div className="mt-3 rounded-xl border border-border bg-surface px-4 py-3 lg:absolute lg:inset-x-0 lg:top-full">
+              <AnimatedCounter storeId={project.chromeStoreId} />
+            </div>
+          )}
+        </div>
+
+        <div className="max-w-xl">
+          <h2
+            id={`${project.id}-heading`}
+            className="font-display text-[clamp(2.8rem,5.4vw,6.2rem)] font-semibold leading-[0.9] tracking-[-0.065em] text-text-primary"
           >
-            <BrowserFrame src={project.image ?? ""} alt={`${project.title} interface screenshot`} label={frameLabel(project)} />
-            {project.chromeStoreId && (
-              <div className="mt-3 rounded-xl border border-border bg-surface px-4 py-3">
-                <AnimatedCounter storeId={project.chromeStoreId} />
-              </div>
-            )}
-          </motion.div>
-
-          <div className="max-w-xl">
-            <h2
-              id={`${project.id}-heading`}
-              className="font-display text-[clamp(2.8rem,5.4vw,6.2rem)] font-semibold leading-[0.9] tracking-[-0.065em] text-text-primary"
-            >
-              {project.title}
-            </h2>
-            {project.award && (
-              <p className="mt-5 inline-flex rounded-full bg-accent/10 px-3 py-1.5 font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-accent">
-                {project.award}
-              </p>
-            )}
-            <p className="mt-6 text-sm leading-6 text-text-secondary sm:text-base sm:leading-7">
-              {project.description}
+            {project.title}
+          </h2>
+          {project.award && (
+            <p className="mt-5 inline-flex rounded-full bg-accent/10 px-3 py-1.5 font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-accent">
+              {project.award}
             </p>
+          )}
+          <p className="mt-6 text-sm leading-6 text-text-secondary sm:text-base sm:leading-7">
+            {project.description}
+          </p>
 
-            <div className="mt-6 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-border bg-surface px-3 py-1.5 font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-text-secondary"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-border bg-surface px-3 py-1.5 font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-text-secondary"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
 
-            <div className="mt-7 border-t border-border pt-5">
-              <ProjectLinks project={project} />
-            </div>
+          <div className="mt-7 border-t border-border pt-5">
+            <ProjectLinks project={project} />
           </div>
         </div>
       </div>
-    </motion.section>
+    </div>
   );
 }
 
+const count = projects.length;
+
 export default function Projects() {
+  const wrapRef = useRef<HTMLElement>(null);
+  const [active, setActive] = useState(0);
+  const [stageEnabled, setStageEnabled] = useState(false);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    const stage = wrap?.closest<HTMLElement>(".story-stage");
+    const track = wrap?.closest<HTMLElement>(".story-track");
+    if (!wrap || !stage || !track) return;
+
+    const measure = () => {
+      const left = wrap.getBoundingClientRect().left - track.getBoundingClientRect().left;
+      wrap.style.setProperty("--stage-left", `${left}px`);
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(wrap);
+    observer.observe(track);
+    measure();
+
+    let frame = 0;
+    const tick = () => {
+      if (stage.dataset.stageEnabled === "true") {
+        const offset = parseFloat(stage.style.getPropertyValue("--story-offset")) || 0;
+        const left = parseFloat(wrap.style.getPropertyValue("--stage-left")) || 0;
+        const next = Math.min(count - 1, Math.max(0, Math.round((offset - left) / window.innerWidth)));
+        setActive((current) => current === next ? current : next);
+        frame = requestAnimationFrame(tick);
+      }
+    };
+    const syncEnabled = () => {
+      const enabled = stage.dataset.stageEnabled === "true";
+      setStageEnabled(enabled);
+      cancelAnimationFrame(frame);
+      if (enabled) frame = requestAnimationFrame(tick);
+    };
+    const stageObserver = new MutationObserver(syncEnabled);
+    stageObserver.observe(stage, { attributes: true, attributeFilter: ["data-stage-enabled"] });
+    syncEnabled();
+
+    return () => {
+      observer.disconnect();
+      stageObserver.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const current = projects[active];
+
   return (
-    <>
-      {projects.map((project, index) => (
-        <ProjectPanel key={project.id} project={project} index={index} />
-      ))}
-    </>
+    <section
+      ref={wrapRef}
+      id="projects"
+      aria-label="Projects"
+      className="stage-wrap"
+      style={{ "--stage-count": count } as CSSProperties}
+    >
+      {stageEnabled ? (
+        <div className="stage-pinned px-5 sm:px-8 lg:px-16">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              className="w-full"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.35, ease }}
+            >
+              <ProjectContent project={current} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      ) : (
+        <div className="stage-stacked">
+          {projects.map((project) => (
+            <div key={project.id} className="story-panel px-5 py-16 sm:px-8 lg:px-16 lg:py-10">
+              <ProjectContent project={project} />
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }

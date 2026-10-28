@@ -2,9 +2,11 @@ interface BrowserFrameProps {
   src: string;
   alt: string;
   label: string;
+  images?: string[];
+  accent?: string;
 }
 
-export default function BrowserFrame({ src, alt, label }: BrowserFrameProps) {
+export default function BrowserFrame({ src, alt, label, images, accent }: BrowserFrameProps) {
   return (
     <div className="surface-card overflow-hidden rounded-[1.5rem] p-2.5 sm:p-3">
       <div className="flex items-center gap-3 border-b border-border px-2 pb-2.5 pt-1 sm:px-2.5">
@@ -21,7 +23,22 @@ export default function BrowserFrame({ src, alt, label }: BrowserFrameProps) {
         </span>
       </div>
       <div className="relative aspect-[16/10] overflow-hidden rounded-[1rem] bg-surface-elevated">
-        {src ? (
+        {images?.length ? (
+          <div
+            className="flex h-full items-center justify-center gap-4 p-5"
+            style={{ background: `linear-gradient(135deg, ${accent}33, ${accent}0d 60%, transparent)` }}
+          >
+            {images.map((image, i) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={image}
+                src={image}
+                alt={`${alt} ${i + 1}`}
+                className="max-h-full w-auto rounded-xl shadow-[0_18px_40px_rgb(23_23_23/0.25)]"
+              />
+            ))}
+          </div>
+        ) : src ? (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
