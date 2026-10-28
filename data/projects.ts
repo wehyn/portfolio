@@ -35,6 +35,32 @@ export const projects: Project[] = [
     status: "live",
   },
   {
+    id: "porto",
+    title: "Porto",
+    description:
+      "A macOS menu-bar utility for inspecting network listeners and active connections on This Mac or a selected Linux host over SSH. Listeners come first, and eligible processes can be stopped with validated identity checks and a separate confirmed Force Kill.",
+    images: ["/images/porto-this-mac.png", "/images/porto-remote.png"],
+    tags: ["Swift", "SwiftUI", "macOS", "SSH"],
+    accentColor: "#0ea5e9",
+    githubUrl: "https://github.com/wehyn/porto",
+    liveUrl: "https://github.com/wehyn/porto/releases/latest",
+    liveUrlLabel: "Download",
+    year: 2026,
+    status: "live",
+  },
+  {
+    id: "nimbus",
+    title: "Nimbus",
+    description:
+      "A local-first launcher and observability dashboard for self-hosted services. Service links, health status, recent activity, and host metrics sit on one calm, kiosk-friendly home screen, backed by SQLite with optional Docker discovery.",
+    image: "/images/nimbus-dashboard.png",
+    tags: ["TypeScript", "Next.js", "SQLite", "Docker"],
+    accentColor: "#6366f1",
+    githubUrl: "https://github.com/wehyn/nimbus",
+    year: 2026,
+    status: "live",
+  },
+  {
     id: "startup-language",
     title: "Startup Language",
     description:

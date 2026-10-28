@@ -138,6 +138,34 @@ button {
   flex: 0 0 100vw;
 }
 
+.stage-pinned {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .story-stage[data-stage-enabled="true"] .stage-wrap {
+    flex: 0 0 calc(var(--stage-count) * 100vw);
+    width: calc(var(--stage-count) * 100vw);
+  }
+
+  .story-stage[data-stage-enabled="true"] .stage-stacked {
+    display: none;
+  }
+
+  .story-stage[data-stage-enabled="true"] .stage-pinned {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    min-height: var(--story-vh, 100dvh);
+    will-change: transform;
+    transform: translate3d(
+      clamp(0px, calc(var(--story-offset, 0px) - var(--stage-left, 0px)), calc((var(--stage-count) - 1) * 100vw)),
+      0,
+      0
+    );
+  }
+}
+
 @media (max-width: 1023px) {
   .story-stage[data-stage-enabled="true"] {
     height: auto;

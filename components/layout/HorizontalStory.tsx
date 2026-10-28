@@ -49,6 +49,7 @@ export default function HorizontalStory({ children }: HorizontalStoryProps) {
       );
 
       track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+      root.style.setProperty("--story-offset", `${offset}px`);
     };
 
     const measure = () => {
@@ -166,6 +167,7 @@ export default function HorizontalStory({ children }: HorizontalStoryProps) {
       lenis = null;
       root.style.height = "";
       root.style.removeProperty("--story-vh");
+      root.style.removeProperty("--story-offset");
       track.style.transform = "";
       root.dataset.stageEnabled = "false";
       setStageEnabled(false);
